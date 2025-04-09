@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_filetree"
+        android:title="@string/filetree"
+        android:icon="@drawable/ic_mtrl_folder" />
+    
+    <item
+        android:id="@+id/menu_git"
+        android:title="@string/git_clone"
+        android:icon="@drawable/ic_mtrl_github" />
+    
+    <item
+        android:id="@+id/menu_terminal"
+        android:title="@string/terminal"
+        android:icon="@drawable/ic_mtrl_terminal" />
+    
+    <item
+        android:id="@+id/menu_settings"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_mtrl_settings" />
+
+</menu>

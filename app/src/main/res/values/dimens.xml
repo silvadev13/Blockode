@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="action_button_margin">16dp</dimen>
+
+  <dimen name="card_radius">16dp</dimen>
+  <dimen name="card_radius_inside">4dp</dimen>
+</resources>

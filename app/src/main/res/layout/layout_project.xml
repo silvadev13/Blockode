@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	style="?attr/materialCardViewFilledStyle"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="16dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    android:id="@+id/card">
+	
+	<RelativeLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="vertical"
+	    android:paddingHorizontal="16dp"
+	    android:paddingVertical="12dp"
+	    android:id="@+id/rootView">
+	    
+	    <com.google.android.material.textview.MaterialTextView
+            android:id="@android:id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:maxLines="2"
+            android:textAppearance="?android:attr/textAppearanceListItem" />
+            
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@android:id/summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@android:id/title"
+            android:layout_alignStart="@android:id/title"
+            android:layout_below="@android:id/title"
+            android:layout_gravity="start"
+            android:maxLines="2"
+            android:textAlignment="viewStart"
+            android:textColor="?android:attr/textColorSecondary" />
+	    
+	</RelativeLayout>
+	
+</com.google.android.material.card.MaterialCardView>

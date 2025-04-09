@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Blockode</string>
+  <string name="app_slogan">Learn, create, share.</string>
+
+  <!-- Common -->
+  <string name="common_word_save">Save</string>
+  <string name="common_word_cancel">Cancel</string>
+  <string name="common_word_delete">Delete</string>
+  <string name="common_word_duplicate">Duplicate</string>
+  <string name="common_word_collection">Collection</string>
+  <string name="common_word_detail">Detail</string>
+  <string name="common_word_create_new">Create new</string>
+  <string name="common_word_run">Run</string>
+  <string name="common_word_code">Code</string>
+  <string name="common_word_ok">Ok</string>
+  <string name="common_word_string">String</string>
+  <string name="common_word_integer">Integer</string>
+  <string name="common_word_boolean">Boolean</string>
+  <string name="common_word_create">Create</string>
+  <string name="common_word_loading">Loading</string>
+  <string name="common_word_settings">Settings</string>
+
+  <string name="message_generating_code">Generating Code</string>
+
+  <!-- Palette Selector Categories -->
+  <string name="block_category_component_func">Component</string>
+  <string name="block_category_control">Control</string>
+  <string name="block_category_file">File</string>
+  <string name="block_category_list">List</string>
+  <string name="block_category_math">Math</string>
+  <string name="block_category_moreblock">More Block</string>
+  <string name="block_category_operator">Operator</string>
+  <string name="block_category_var">Variable</string>
+  <string name="block_category_view_func">View</string>
+
+  <!-- Button labels -->
+  <string name="btn_cancel">Cancel</string>
+  <string name="btn_accept">Accept</string>
+
+  <!-- Popup titles -->
+  <string name="title_popup_input_int_value">Enter Integer Value</string>
+  <string name="title_popup_input_str_value">Enter String Value</string>
+  <string name="title_popup_select_int_var">Select Integer Variable</string>
+  <string name="title_popup_select_bool_var">Select Boolean Variable</string>
+  <string name="title_popup_select_str_var">Select String Variable</string>
+  <string name="title_popup_select_int_list">Select Integer List</string>
+  <string name="title_popup_select_str_list">Select String List</string>
+  <string name="title_popup_select_list">Select List</string>
+  <string name="title_popup_create_variable">Create variable</string>
+
+  <!-- Block specs -->
+  <string name="block_set_var_bool" formatted="false">set %m.varBool to %b</string>
+  <string name="block_set_var_int" formatted="false">set %m.varInt to %d</string>
+  <string name="block_set_var_str" formatted="false">set %m.varStr to %s</string>
+  <string name="block_invalid">Invalid</string>
+  <string name="block_and">%b and %b</string>
+  <string name="block_bigger">%d > %d</string>
+  <string name="block_break">break</string>
+  <string name="block_divide">%d / %d</string>
+  <string name="block_do_print">println %s</string>
+  <string name="block_else">else</string>
+  <string name="block_equal">%d = %d</string>
+  <string name="block_false">false</string>
+  <string name="block_forever">forever</string>
+  <string name="block_get_at_list_int">get at %d of %m.listInt</string>
+  <string name="block_get_at_list_str">get at %d of %m.listStr</string>
+  <string name="block_if">if %b then</string>
+  <string name="block_if_else">if %b then</string>
+  <string name="block_increase_int">%m.varInt increase 1</string>
+  <string name="block_decrease_int">%m.varInt decrease 1</string>
+  <string name="block_minus">%d - %d</string>
+  <string name="block_not">not %b</string>
+  <string name="block_or">%b or %b</string>
+  <string name="block_plus">%d + %d</string>
+  <string name="block_random">pick random %d to %d</string>
+  <string name="block_repeat">repeat %d</string>
+  <string name="block_rest">%d % %d</string>
+  <string name="block_smaller">%d &lt; %d</string>
+  <string name="block_string_equals">%s equals %s</string>
+  <string name="block_string_index">index %s of %s</string>
+  <string name="block_string_join">join %s and %s</string>
+  <string name="block_string_length">length of %s</string>
+  <string name="block_string_sub">%s substring %d to %d</string>
+  <string name="block_times">%d * %d</string>
+  <string name="block_to_lower_case">toLowerCase %s</string>
+  <string name="block_to_number">toNumber %s</string>
+  <string name="block_to_string">toString %d</string>
+  <string name="block_to_upper_case">toUpperCase %s</string>
+  <string name="block_trim">trim %s</string>
+  <string name="block_true">true</string>
+  <string name="block_add_source_directly">add source directly %s</string>
+
+  <!-- Hints -->
+  <string name="hint_enter_value">Enter value</string>
+  <string name="hint_enter_variable_name">Enter variable name</string>
+  <string name="project_name">Project name</string>
+  <string name="package_name">Package name</string>
+  <string name="project_class">Project class</string>
+  <string name="main_class_package">Main class package</string>
+
+  <!-- Logic -->
+  <string name="logic_btn_add_variable">Add variable</string>
+  <string name="logic_btn_remove_variable">Remove variable</string>
+  <string name="logic_btn_add_list">Add list</string>
+  <string name="logic_btn_remove_list">Remove list</string>
+  <string name="logic_btn_make_block">Make block</string>
+
+  <!-- root -->
+  <string name="root_spec_define">Define</string>
+
+  <!-- errors -->
+  <string name="err_valid_already_used">Current name is unavailable</string>
+  <string name="err_valid_app_name">"Special letters(&amp;, &lt;, >, \", ') are not allowed"</string>
+  <string name="err_valid_max_len">You can use maximum %d letters</string>
+  <string name="err_valid_min_len">Use at least %d letters</string>
+  <string name="err_valid_only_eng_1">Only use letters(a-z), numbers and Special characters(.),(@)</string>
+  <string name="err_valid_only_eng_2">Only use letters(a-z), numbers and Special characters(.)</string>
+  <string name="err_valid_only_eng_3">Only use letters(a-z), numbers and Special characters(_)</string>
+  <string name="err_start_number">The variable name must start with a letter</string>
+  <string name="err_use_rev_name">"Can't use reserved keywords"</string>
+
+  <!-- labels -->
+  <string name="create_new_project">Create new project</string>
+  <string name="create_from_template">Create from template</string>
+  <string name="no_project">No project</string>
+
+  <!-- Toast -->
+  <string name="fill_all_fields">Please fill in all fields</string>
+  <string name="common_word_projects">Projects</string>
+  
+  <!-- editor -->
+  <string name="no_files_opened">No files opened</string>
+  
+  <!-- workspace -->
+  <string name="filetree">File list</string>
+  <string name="git_clone">Git Clone</string>
+  <string name="terminal">Terminal</string>
+  <string name="settings">Settings</string>
+</resources>
