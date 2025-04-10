@@ -10,9 +10,10 @@ import dev.silvadev.blockode.filetree.adapter.FileTreeAdapter;
 import dev.silvadev.blockode.filetree.listener.OnTreeItemClickListener;
 import dev.silvadev.blockode.filetree.utils.FileTreeUtils;
 import dev.silvadev.blockode.filetree.Node;
+import dev.silvadev.blockode.ui.fragments.editor.EditorFragment;
+import dev.silvadev.blockode.ui.fragments.editor.core.ProjectHolder;
 import java.io.File;
 import dev.silvadev.blockode.project.manage.ProjectManager;
-import dev.silvadev.blockode.ui.activities.editor.EditorActivity;
 import dev.silvadev.blockode.ui.activities.editor.EditorState;
 import dev.silvadev.blockode.ui.base.BaseAppCompatActivity;
 import dev.silvadev.blockode.ui.base.BaseFragment;
@@ -34,8 +35,7 @@ public class WorkspaceFragment extends BaseFragment {
     
     @Override
     protected void onBindLayout(final Bundle savedInstanceState) {
-        EditorActivity editorActivity = (EditorActivity) getActivity();
-        if (editorActivity != null) projectManager = editorActivity.getProjectManager();
+        if (ProjectHolder.getProjectManager() != null) projectManager = ProjectHolder.getProjectManager();
         setupFileTree();
     }
     
@@ -46,7 +46,9 @@ public class WorkspaceFragment extends BaseFragment {
         adapter.setOnItemClickListener(new OnTreeItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                // TODO: Implement this method
+                final var file = nodes.get(position).value;
+                if (!file.exists() || file.isDirectory()) return;
+                if (file.isFile()) ProjectHolder.fileViewModel.addFile(file);
             }
             
             @Override

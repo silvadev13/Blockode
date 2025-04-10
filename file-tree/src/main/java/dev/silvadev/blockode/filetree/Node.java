@@ -1,9 +1,11 @@
 package dev.silvadev.blockode.filetree;
 
+import androidx.annotation.Keep;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Keep
 public class Node<T> {
     public T value;
     public Node<T> parent;

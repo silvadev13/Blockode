@@ -24,7 +24,7 @@ public class ProjectsViewModel extends ViewModel {
     var toReturnList = new ArrayList<File>();
     ogFiles.forEach(
         ogFile -> {
-          toReturnList.add(new File(ogFile.getAbsolutePath()));
+          if (ogFile.isDirectory()) toReturnList.add(new File(ogFile.getAbsolutePath()));
         });
     return toReturnList;
   }

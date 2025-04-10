@@ -7,13 +7,14 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import dev.silvadev.blockode.beans.ProjectBean;
 import dev.silvadev.blockode.databinding.FragmentProjectsBinding;
-import dev.silvadev.blockode.ui.activities.editor.EditorActivity;
+import dev.silvadev.blockode.ui.fragments.editor.EditorFragment;
 import dev.silvadev.blockode.ui.activities.editor.EditorState;
 import dev.silvadev.blockode.ui.base.BaseFragment;
+import dev.silvadev.blockode.ui.fragments.editor.core.ProjectHolder;
 import dev.silvadev.blockode.ui.fragments.main.components.CreateProjectDialog;
 import dev.silvadev.blockode.ui.fragments.projects.project.ProjectsAdapter;
 import dev.silvadev.blockode.ui.fragments.projects.project.ProjectsViewModel;
-
+import dev.silvadev.blockode.R;
 public class ProjectsFragment extends BaseFragment {
 	
     @NonNull private FragmentProjectsBinding binding;
@@ -55,9 +56,8 @@ public class ProjectsFragment extends BaseFragment {
     public void openProject(final ProjectBean projectBean) {
         final var editorState = new EditorState();
         editorState.project = projectBean;
-    	final var intent = new Intent(getContext(), EditorActivity.class);
-        intent.putExtra("editor_state", editorState);
-        startActivity(intent);
+        ProjectHolder.setEditorState(editorState);
+        showFragment(R.id.content, new EditorFragment(), "editorFragment");
     }
     
     public void cardClick() {

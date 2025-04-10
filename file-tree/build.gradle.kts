@@ -30,4 +30,5 @@ android {
 dependencies {
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.13.0-alpha11")
+    implementation("androidx.annotation:annotation:1.7.0")
 }

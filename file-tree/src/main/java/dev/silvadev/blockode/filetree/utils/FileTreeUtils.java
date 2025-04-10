@@ -1,5 +1,6 @@
 package dev.silvadev.blockode.filetree.utils;
 
+import androidx.annotation.Keep;
 import dev.silvadev.blockode.filetree.Node;
 import java.io.File;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+@Keep
 public class FileTreeUtils {
 
     public static List<Node<File>> toNodes(File dir) {
