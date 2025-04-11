@@ -11,6 +11,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import dev.silvadev.blockode.databinding.FragmentEditorBinding;
@@ -34,6 +35,7 @@ public class EditorFragment extends BaseFragment {
     
     public ProjectManager projectManager;
     private FileViewModel fileViewModel;
+    private TabLayoutMediator tabLayoutMediator;
     
     @Override
     protected View bindLayout() {
@@ -49,6 +51,10 @@ public class EditorFragment extends BaseFragment {
         
         editorAdapter = new EditorAdapter(EditorFragment.this, fileViewModel);
         binding.pager.setAdapter(editorAdapter);
+        binding.pager.setUserInputEnabled(false);
+        binding.pager.setSaveEnabled(true);
+        
+        binding.tabs.setSmoothScrollingEnabled(false);
         
         binding.tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -67,13 +73,19 @@ public class EditorFragment extends BaseFragment {
             }
         });
         
-        new TabLayoutMediator(binding.tabs, binding.pager, true, false, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(TabLayout.Tab tab, int pos) {
-                 if (pos >= fileViewModel.getFiles().getValue().size()) return;
-                 tab.setText(fileViewModel.getFiles().getValue().get(pos).getName());
+        if(tabLayoutMediator != null) {
+        	tabLayoutMediator.detach();
+        }
+        
+        tabLayoutMediator = new TabLayoutMediator(binding.tabs, binding.pager, true, false, (tab, pos) -> {
+            List<File> files = fileViewModel.getFiles().getValue();
+            if (pos >= files.size()) {
+                tab.setText("Tab Ghost " + pos);
+                return;
             }
-        }).attach();
+            tab.setText(files.get(pos).getName());
+        });
+        tabLayoutMediator.attach();
     }
     
     private void setupViewModels() {
@@ -136,12 +148,13 @@ public class EditorFragment extends BaseFragment {
             binding.tabs.setVisibility(View.VISIBLE);
             binding.container.setDisplayedChild(0);
         }
-        /*binding.tabs.removeAllTabs();
+        
+        binding.tabs.removeAllTabs();
         for(File file : files) {
         	final var newTab = binding.tabs.newTab();
             newTab.setText(file.getName());
             binding.tabs.addTab(newTab, false);
-        }*/
+        }
     }
     
 }
