@@ -21,3 +21,4 @@
 #-renamesourcefileattribute SourceFile
 -keep class com.itsaky.androidide.zipfs.** { *; }
 -keep class com.itsaky.androidide.zipfs2.** { *; }
+-keep class dev.silvadev.build.** { *; }
