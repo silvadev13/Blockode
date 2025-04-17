@@ -36,17 +36,18 @@ public class EditorAdapter extends FragmentStateAdapter {
         this.fragment = fragment;
         this.fileViewModel = fileViewModel;
         
-        List<Long> newIds = new ArrayList<>();
         fileViewModel.getFiles().observe(fragment, newFiles -> {
             if (newFiles == null) return;
+            
+            List<Long> newIds = new ArrayList<>();
             
             for(File file : newFiles) {
             	newIds.add((long)file.hashCode());
             }
             
             setIds(newIds);
-            notifyDataSetChanged();
         });
+        System.loadLibrary("android-tree-sitter");
     }
     
     @Override
@@ -101,7 +102,7 @@ public class EditorAdapter extends FragmentStateAdapter {
     
     @Override
     public long getItemId(int pos) {
-        return ids.get(pos).hashCode();
+        return ids.get(pos);
     }
     
     
@@ -118,10 +119,7 @@ public class EditorAdapter extends FragmentStateAdapter {
     
     @Override
     public boolean containsItem(long itemId) {
-        for(EditorContainerFragment fragment : fragments) {
-        	if (fragment.getHashCode() == itemId) return true;
-        }
-        return false;
+        return ids.contains(itemId);
     }
     
     

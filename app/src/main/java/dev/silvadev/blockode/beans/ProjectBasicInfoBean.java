@@ -24,21 +24,16 @@ public class ProjectBasicInfoBean extends BaseBean implements Parcelable {
   @SerializedName("package_name")
   public String packageName;
 
-  @SerializedName("main_class_package")
-  public String mainClassPackage;
-
   public ProjectBasicInfoBean() {}
 
   public ProjectBasicInfoBean(final Parcel parcel) {
     this.name = parcel.readString();
     this.packageName = parcel.readString();
-    this.mainClassPackage = parcel.readString();
   }
 
   public void copy(final ProjectBasicInfoBean other) {
     this.name = other.name;
     this.packageName = other.packageName;
-    this.mainClassPackage = other.mainClassPackage;
   }
 
   @Override
@@ -55,13 +50,11 @@ public class ProjectBasicInfoBean extends BaseBean implements Parcelable {
   public void print() {
     PrintUtil.print(this.name);
     PrintUtil.print(this.packageName);
-    PrintUtil.print(this.mainClassPackage);
   }
 
   @Override
   public void writeToParcel(final Parcel parcel, final int flags) {
     parcel.writeString(this.name);
     parcel.writeString(this.packageName);
-    parcel.writeString(this.mainClassPackage);
   }
 }

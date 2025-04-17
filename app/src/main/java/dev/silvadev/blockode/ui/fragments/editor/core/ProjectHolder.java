@@ -3,11 +3,14 @@ package dev.silvadev.blockode.ui.fragments.editor.core;
 import dev.silvadev.blockode.model.FileViewModel;
 import dev.silvadev.blockode.project.manage.ProjectManager;
 import dev.silvadev.blockode.ui.activities.editor.EditorState;
+import dev.silvadev.blockode.ui.fragments.projects.project.ProjectsViewModel;
 
 public class ProjectHolder {
     
     public static EditorState editorState;
+    
     public static ProjectManager projectManager;
+    
     public static FileViewModel fileViewModel;
     
     /* Method Setters */

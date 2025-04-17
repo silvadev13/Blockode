@@ -25,44 +25,79 @@
                  android:layout_width="match_parent"
                  android:hapticFeedbackEnabled="true"
                  app:title="@string/app_name"
+                 app:menu="@menu/menu_toolbar_editor"
                  app:layout_collapseMode="pin"
                  android:id="@+id/toolbar" />
 
-            <com.google.android.material.tabs.TabLayout
+            <com.google.android.material.progressindicator.LinearProgressIndicator
                  android:layout_height="wrap_content"
                  android:layout_width="match_parent"
                  android:visibility="gone"
-                 app:tabMode="scrollable"
-                 app:tabGravity="start"
-                 android:id="@+id/tabs" />
+                 android:indeterminate="true"
+                 android:id="@+id/indexing" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <ViewFlipper
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
              android:layout_height="match_parent"
-             android:layout_width="match_parent"
-             android:id="@+id/container">
-
-            <androidx.viewpager2.widget.ViewPager2
-                 android:layout_height="match_parent"
-                 android:layout_width="match_parent"
-                 android:id="@+id/pager" />
+             android:layout_width="match_parent">
 
             <LinearLayout
                  android:layout_height="match_parent"
                  android:layout_width="match_parent"
-                 android:gravity="center">
+                 android:orientation="vertical"
+                 android:paddingBottom="70dp">
 
-                <TextView
+                <com.google.android.material.tabs.TabLayout
                      android:layout_height="wrap_content"
-                     android:layout_width="wrap_content"
-                     android:textSize="18dp"
-                     android:text="@string/no_files_opened"
-                     android:id="@+id/no_files_opened" />
+                     android:layout_width="match_parent"
+                     android:visibility="gone"
+                     app:tabMode="scrollable"
+                     app:tabGravity="start"
+                     android:id="@+id/tabs" />
+
+                <ViewFlipper
+                     android:layout_height="match_parent"
+                     android:layout_width="match_parent"
+                     app:layout_constraintStart_toStartOf="parent"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     app:layout_constraintBottom_toTopOf="@id/editorSheet"
+                     app:layout_constraintTop_toBottomOf="@id/tabs"
+                     android:id="@+id/container">
+
+                    <androidx.viewpager2.widget.ViewPager2
+                         android:layout_height="match_parent"
+                         android:layout_width="match_parent"
+                         android:id="@+id/pager" />
+
+                    <LinearLayout
+                         android:layout_height="match_parent"
+                         android:layout_width="match_parent"
+                         android:gravity="center">
+
+                        <TextView
+                             android:layout_height="wrap_content"
+                             android:layout_width="wrap_content"
+                             android:textSize="18dp"
+                             android:text="@string/no_files_opened"
+                             android:id="@+id/no_files_opened" />
+
+                    </LinearLayout>
+
+                </ViewFlipper>
 
             </LinearLayout>
 
-        </ViewFlipper>
+            <androidx.fragment.app.FragmentContainerView
+                 android:layout_height="match_parent"
+                 android:layout_width="match_parent"
+                 android:background="?colorSurface"
+                 app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+                 app:behavior_peekHeight="70dp"
+                 android:name="dev.silvadev.blockode.ui.fragments.editor.EditorBottomFragment"
+                 android:id="@+id/editorSheet" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </LinearLayout>
 

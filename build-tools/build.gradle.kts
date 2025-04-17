@@ -1,0 +1,30 @@
+plugins {
+    id("com.android.library")
+}
+android {
+    namespace = "dev.silvadev.build"
+    compileSdk = 34
+
+    defaultConfig {
+        minSdk = 26
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation("io.github.itsaky:nb-javac-android:17.0.0.3")
+    implementation("com.android.tools:r8:8.5.35")
+    implementation("com.google.code.gson:gson:2.10.1")
+    api("com.google.guava:guava:33.1.0-android")
+}

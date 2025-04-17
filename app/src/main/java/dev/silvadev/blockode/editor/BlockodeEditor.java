@@ -1,9 +1,12 @@
 package dev.silvadev.blockode.editor;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
+import com.google.android.material.color.MaterialColors;
+import dev.silvadev.blockode.editor.language.TsLanguageJava;
 import io.github.rosemoe.sora.langs.textmate.TextMateAnalyzer;
 import io.github.rosemoe.sora.langs.textmate.TextMateColorScheme;
 import io.github.rosemoe.sora.langs.textmate.TextMateLanguage;
@@ -11,6 +14,7 @@ import io.github.rosemoe.sora.langs.textmate.registry.FileProviderRegistry;
 import io.github.rosemoe.sora.langs.textmate.registry.GrammarRegistry;
 import io.github.rosemoe.sora.langs.textmate.registry.ThemeRegistry;
 import io.github.rosemoe.sora.langs.textmate.registry.model.ThemeModel;
+import io.github.rosemoe.sora.widget.component.EditorDiagnosticTooltipWindow;
 import io.github.rosemoe.sora.widget.schemes.EditorColorScheme;
 import org.eclipse.tm4e.core.registry.IThemeSource;
 import io.github.rosemoe.sora.langs.textmate.registry.provider.AssetsFileResolver;
@@ -19,8 +23,6 @@ import io.github.rosemoe.sora.widget.component.EditorAutoCompletion;
 import io.github.rosemoe.sora.widget.schemes.SchemeDarcula;
 
 public class BlockodeEditor extends CodeEditor {
-    
-    public String path;
     
     public BlockodeEditor(Context context) {
         super(context);
@@ -39,13 +41,7 @@ public class BlockodeEditor extends CodeEditor {
     
     public void init() {
         try {
-            /*TextMateColorScheme scheme = TextMateColorScheme.create(ThemeRegistry.getInstance());
-        	setColorScheme();
-            TextMateLanguage language = TextMateLanguage.create(GrammarRegistry.getInstance().loadGrammars("editor/languages.json").get(0).getScopeName(), true);
-            language.setAutoCompleteEnabled(true);
-            setEditorLanguage(new JavaLanguage(this, getPath()));*/
-            EditorColorScheme editorColorScheme = new SchemeDarcula();
-            setColorScheme(editorColorScheme);
+            setColorScheme(TextMateColorScheme.create(ThemeRegistry.getInstance()));
             setTypefaceText(Typeface.MONOSPACE);
             setWordwrap(true);
             getProps().symbolPairAutoCompletion = true;
@@ -54,14 +50,6 @@ public class BlockodeEditor extends CodeEditor {
             Log.e("BlockodeEditor", err.toString());
         	err.printStackTrace();
         }
-    }
-    
-    public void setPath(String path) {
-    	this.path = path;
-    }
-    
-    public String getPath() {
-    	return path;
     }
     
 }

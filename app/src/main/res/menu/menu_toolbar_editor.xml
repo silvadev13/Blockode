@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_undo"
+        android:title="@string/common_word_undo"
+        android:icon="@drawable/ic_mtrl_undo" />
+    
+    <item
+        android:id="@+id/menu_redo"
+        android:title="@string/common_word_redo"
+        android:icon="@drawable/ic_mtrl_redo" />
+    
+    <item
+        android:id="@+id/menu_build"
+        android:title="@string/common_word_run"
+        android:icon="@drawable/ic_mtrl_run" />
+    
+    <item
+        android:id="@+id/menu_save"
+        android:title="@string/common_word_save"
+        android:icon="@drawable/ic_mtrl_save" />
+    
+    <item
+        android:id="@+id/menu_more"
+        android:title="@string/common_word_more">
+       
+       <!-- coming soon -->
+       
+    </item>
+
+</menu>

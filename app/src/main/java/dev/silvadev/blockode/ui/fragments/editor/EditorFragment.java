@@ -2,7 +2,11 @@ package dev.silvadev.blockode.ui.fragments.editor;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -12,9 +16,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import dev.silvadev.blockode.databinding.FragmentEditorBinding;
+import dev.silvadev.blockode.editor.indexers.Indexer;
+import dev.silvadev.blockode.editor.indexers.IndexerUtil;
 import dev.silvadev.blockode.model.FileViewModel;
 import dev.silvadev.blockode.project.manage.ProjectManager;
 import dev.silvadev.blockode.ui.activities.editor.EditorState;
@@ -23,6 +30,9 @@ import dev.silvadev.blockode.ui.fragments.editor.adapter.EditorAdapter;
 import dev.silvadev.blockode.ui.base.BaseFragment;
 import dev.silvadev.blockode.R;
 import dev.silvadev.blockode.ui.fragments.editor.core.ProjectHolder;
+import dev.silvadev.blockode.utils.AndroidUtilities;
+import dev.silvadev.build.BuildTask;
+import dev.silvadev.build.project.Project;
 import java.io.File;
 import java.util.List;
 
@@ -47,7 +57,10 @@ public class EditorFragment extends BaseFragment {
     protected void onBindLayout(final Bundle savedInstanceState) {
         setupData();
         setupViewModels();
+        setupToolbar();
         setupDrawer();
+        setupIndex();
+        setupBottomSheet();
         
         editorAdapter = new EditorAdapter(EditorFragment.this, fileViewModel);
         binding.pager.setAdapter(editorAdapter);
@@ -73,26 +86,35 @@ public class EditorFragment extends BaseFragment {
             }
         });
         
-        if(tabLayoutMediator != null) {
-        	tabLayoutMediator.detach();
-        }
-        
-        tabLayoutMediator = new TabLayoutMediator(binding.tabs, binding.pager, true, false, (tab, pos) -> {
-            List<File> files = fileViewModel.getFiles().getValue();
-            if (pos >= files.size()) {
-                tab.setText("Tab Ghost " + pos);
-                return;
-            }
-            tab.setText(files.get(pos).getName());
-        });
-        tabLayoutMediator.attach();
+    }
+    
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_toolbar_editor, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
     
     private void setupViewModels() {
-    	fileViewModel.getFiles().observe(this, this::onFilesUpdated);
+    	fileViewModel.getFiles().observe(this, files -> {
+            onFilesUpdated(files);
+            
+            if(tabLayoutMediator != null) {
+            	tabLayoutMediator.detach();
+            }
+        
+            tabLayoutMediator = new TabLayoutMediator(binding.tabs, binding.pager, true, false, (tab, pos) -> {
+                if (pos >= getFiles().size()) {
+                    tab.setText("Tab Ghost " + pos);
+                    return;
+                }
+                tab.setText(getFiles().get(pos).getName());
+            });
+            tabLayoutMediator.attach();
+        });
         
         fileViewModel.currentPosition.observe(this, pos -> {
-            if (binding.drawer.isOpen()) binding.drawer.close();
+            if (binding.drawer.isDrawerOpen(GravityCompat.START)) binding.drawer.closeDrawer(GravityCompat.START);
             
             final var tab = binding.tabs.getTabAt(pos);
             if(tab != null && !tab.isSelected()) {
@@ -102,13 +124,48 @@ public class EditorFragment extends BaseFragment {
         });
         
         fileViewModel.setCurrentPosition(0);
-        if(fileViewModel.getFiles().getValue().isEmpty()) {
+        if(getFiles().isEmpty()) {
         	binding.container.setDisplayedChild(1);
         }
     }
     
+    private void setupToolbar() {
+    	MainActivity main = (MainActivity) getActivity();
+        if(main != null) {
+        	main.setSupportActionBar(binding.toolbar);
+            setHasOptionsMenu(true);
+        }
+        binding.toolbar.setSubtitle(editorState.project.basicInfo.name);
+        binding.toolbar.setOnMenuItemClickListener(item -> {
+            if(item.getItemId() == R.id.menu_build) {
+            	var project = new Project(ProjectManager.getProjectRootFile(editorState.project.scId));
+                var buildTask = new BuildTask(getContext(), new BuildTask.onBuildStatusChanged() {
+                    @Override
+                    public void onChanged(BuildTask.BuildKind kind, String message) {
+                        if(kind == BuildTask.BuildKind.INFO) {
+                        	Log.d("EditorDebug", "INFO: " + message);
+                        }
+                        
+                        if(kind == BuildTask.BuildKind.WARN) {
+                        	Log.d("EditorDebug", "WARN: " + message);
+                        }
+                        
+                        if(kind == BuildTask.BuildKind.ERROR) {
+                        	Log.d("EditorDebug", "ERROR: " + message);
+                        }
+                        
+                        if(kind == BuildTask.BuildKind.SUCCESS) {
+                        	Log.d("EditorDebug", "SUCCESS: " + message);
+                        }
+                    }
+                });
+                buildTask.execute(project);
+            }
+            return true;
+        });
+    }
+    
     private void setupDrawer() {
-        ((MainActivity)getActivity()).setSupportActionBar(binding.toolbar);
         binding.drawer.setScrimColor(Color.TRANSPARENT);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
             requireActivity(),
@@ -149,12 +206,63 @@ public class EditorFragment extends BaseFragment {
             binding.container.setDisplayedChild(0);
         }
         
-        binding.tabs.removeAllTabs();
-        for(File file : files) {
-        	final var newTab = binding.tabs.newTab();
-            newTab.setText(file.getName());
-            binding.tabs.addTab(newTab, false);
-        }
+    }
+    
+    private void setupIndex() {
+        binding.indexing.setVisibility(View.VISIBLE);
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                try {
+                	Looper.prepare();
+                    IndexerUtil.setIndexer(new Indexer().indexFiles(getContext(), editorState));
+                } catch(Exception err) {
+                	err.printStackTrace();
+                }
+                
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    if (!IndexerUtil.getIndexer().isIndexing())
+                    binding.indexing.setVisibility(View.GONE);
+                });
+            }
+        }.start();
+    }
+    
+    private void setupBottomSheet() {
+    	BottomSheetBehavior behavior = BottomSheetBehavior.from(binding.editorSheet);
+        behavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(View arg0, int arg1) {
+                // TODO: Implement this method
+            }
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+                setOffset(slideOffset);
+            }
+        });
+        behavior.setHalfExpandedRatio(0.5f);
+        behavior.setFitToContents(false);
+    }
+    
+    private List<File> getFiles() {
+        return fileViewModel.getFiles().getValue();
+    }
+    
+    private void setOffset(float offset) {
+    	if(offset >= 0.50f) {
+            var invertedOffset = 0.5f - offset;
+    		var newOffset = ((invertedOffset + 0.5f) * 2f);
+            setHeaderOffset(newOffset);
+    	} else if(binding.editorSheet.getHeight() != AndroidUtilities.dp(60)) {
+    		setHeaderOffset(1f);
+    	}
+    }
+    
+    private void setHeaderOffset(float offset) {
+        var header = ((EditorBottomFragment)binding.editorSheet.getFragment()).getHeaderView();
+    	header.getLayoutParams().height = Math.round(AndroidUtilities.dp(70) * offset);
+        header.requestLayout();
     }
     
 }

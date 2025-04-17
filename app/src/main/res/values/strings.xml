@@ -12,6 +12,9 @@
   <string name="common_word_detail">Detail</string>
   <string name="common_word_create_new">Create new</string>
   <string name="common_word_run">Run</string>
+  <string name="common_word_undo">Undo</string>
+  <string name="common_word_redo">Redo</string>
+  <string name="common_word_more">More</string>
   <string name="common_word_code">Code</string>
   <string name="common_word_ok">Ok</string>
   <string name="common_word_string">String</string>
@@ -37,6 +40,7 @@
   <!-- Button labels -->
   <string name="btn_cancel">Cancel</string>
   <string name="btn_accept">Accept</string>
+  <string name="btn_install">Install</string>
 
   <!-- Popup titles -->
   <string name="title_popup_input_int_value">Enter Integer Value</string>
@@ -97,7 +101,7 @@
   <string name="project_name">Project name</string>
   <string name="package_name">Package name</string>
   <string name="project_class">Project class</string>
-  <string name="main_class_package">Main class package</string>
+  <string name="hint_swipe">Swipe up/down or click on</string>
 
   <!-- Logic -->
   <string name="logic_btn_add_variable">Add variable</string>
@@ -124,6 +128,8 @@
   <string name="create_new_project">Create new project</string>
   <string name="create_from_template">Create from template</string>
   <string name="no_project">No project</string>
+  <string name="install_required_files">Install required files</string>
+  <string name="install_required_files_desc">This will download the files:\n •index.json (necessary for Java completion)</string>
 
   <!-- Toast -->
   <string name="fill_all_fields">Please fill in all fields</string>
@@ -131,10 +137,13 @@
   
   <!-- editor -->
   <string name="no_files_opened">No files opened</string>
+  <string name="build_success_status">Compiled with successfuly in </string>
+  <string name="build_error_status">Compilation failed in </string>
   
   <!-- workspace -->
   <string name="filetree">File list</string>
   <string name="git_clone">Git Clone</string>
   <string name="terminal">Terminal</string>
   <string name="settings">Settings</string>
+  
 </resources>

@@ -8,7 +8,7 @@ android {
 
   defaultConfig {
     applicationId = "dev.silvadev.blockode"
-    minSdk = 21
+    minSdk = 26
     targetSdk = 34
     versionCode = 1
     versionName = "1.0"
@@ -57,18 +57,30 @@ android {
 
 dependencies {
   
+  implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
+  
   implementation("androidx.constraintlayout:constraintlayout:2.2.0")
   implementation("com.google.android.material:material:1.13.0-alpha11")
   implementation("androidx.appcompat:appcompat:1.7.0")
-  implementation("com.github.bumptech.glide:glide:4.16.0")
-  implementation("com.google.code.gson:gson:2.12.1")
+  implementation("com.google.code.gson:gson:2.10.1")
+  api("com.google.guava:guava:33.1.0-android")
   implementation("androidx.preference:preference:1.2.1")
   
-  val editorVersion = "0.23.4-96c0abc-SNAPSHOT"
+  implementation("com.github.bumptech.glide:glide:4.16.0")
+  implementation("net.lingala.zip4j:zip4j:2.11.5")
+  implementation("com.github.MindorksOpenSource:PRDownloader:0.6.0")
+  implementation("io.github.itsaky:nb-javac-android:17.0.0.3")
+  
+  val editorVersion = "0.23.4"
   implementation("io.github.Rosemoe.sora-editor:editor:$editorVersion")
   implementation("io.github.Rosemoe.sora-editor:language-textmate:$editorVersion")
+  implementation("io.github.Rosemoe.sora-editor:language-treesitter:$editorVersion")
+  implementation("com.itsaky.androidide.treesitter:android-tree-sitter:4.3.1")
+  implementation("com.itsaky.androidide.treesitter:tree-sitter-java:4.3.1")
   
   implementation(project(":file-tree"))
+  implementation(project(":build-tools"))
+  //implementation(project(":feature:java-completion"))
   
   coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 }

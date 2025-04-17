@@ -40,8 +40,9 @@ public class WorkspaceFragment extends BaseFragment {
     }
     
     private void setupFileTree() {
-        File dir = ProjectManager.getProjectsFile();
-    	List<Node<File>> nodes = FileTreeUtils.toNodes(dir);
+        File dir = new File(ProjectManager.getProjectsFile(), projectManager.getScId());
+    	List<Node<File>> nodes = new ArrayList<>();
+        nodes.add(new Node<>(dir));
         FileTreeAdapter adapter = new FileTreeAdapter(getContext(), nodes);
         adapter.setOnItemClickListener(new OnTreeItemClickListener() {
             @Override

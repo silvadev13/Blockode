@@ -33,7 +33,7 @@ public class ProjectsAdapter extends ListAdapter<File, ProjectsAdapter.ProjectsA
     var project = ProjectManager.getProjectByScId(item.getName());
     assert project != null;
     holder.binding.title.setText(project.basicInfo.name);
-    holder.binding.summary.setText(project.basicInfo.mainClassPackage);
+    holder.binding.summary.setText(project.basicInfo.packageName);
     holder.binding.card.setOnClickListener(
         v -> {
           if (onProjectClickListener != null) onProjectClickListener.call(project);

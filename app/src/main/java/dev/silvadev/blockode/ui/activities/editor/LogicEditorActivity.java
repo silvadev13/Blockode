@@ -75,7 +75,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity
     configureBlockPane();
     configureToolbar(binding.toolbar);
     getOnBackPressedDispatcher().addCallback(onBackPressedCallback);
-    javaBlocks.createRoot(editorState.project.basicInfo.mainClassPackage);
+    javaBlocks.createRoot(editorState.project.basicInfo.packageName);
     paletteAnimator.adjustLayout2(getResources().getConfiguration().orientation);
     binding.paletteBlock.getPaletteSelector().setOnBlockCategorySelectListener(this);
     binding.paletteBlock.getPaletteSelector().getItems().get(0).setSelected(true);
@@ -127,7 +127,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity
   @Override
   protected void configureToolbar(@NonNull MaterialToolbar toolbar) {
     super.configureToolbar(toolbar);
-    toolbar.setSubtitle(editorState.project.basicInfo.mainClassPackage);
+    toolbar.setSubtitle(editorState.project.basicInfo.packageName);
   }
 
   /** Get and define all needed variables */
