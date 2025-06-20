@@ -21,3 +21,4 @@ rootProject.name = "Blockode"
 include(":app")
 include(":file-tree")
 include(":build-tools")
+include(":javac")

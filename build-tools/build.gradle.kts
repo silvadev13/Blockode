@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-    implementation("io.github.itsaky:nb-javac-android:17.0.0.3")
+    implementation(project(":javac"))
     implementation("com.android.tools:r8:8.5.35")
     implementation("com.google.code.gson:gson:2.10.1")
     api("com.google.guava:guava:33.1.0-android")

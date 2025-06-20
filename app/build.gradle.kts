@@ -69,7 +69,6 @@ dependencies {
   implementation("com.github.bumptech.glide:glide:4.16.0")
   implementation("net.lingala.zip4j:zip4j:2.11.5")
   implementation("com.github.MindorksOpenSource:PRDownloader:0.6.0")
-  implementation("io.github.itsaky:nb-javac-android:17.0.0.3")
   
   val editorVersion = "0.23.4"
   implementation("io.github.Rosemoe.sora-editor:editor:$editorVersion")
@@ -81,6 +80,7 @@ dependencies {
   implementation(project(":file-tree"))
   implementation(project(":build-tools"))
   //implementation(project(":feature:java-completion"))
+  implementation(project(":javac"))
   
   coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 }
