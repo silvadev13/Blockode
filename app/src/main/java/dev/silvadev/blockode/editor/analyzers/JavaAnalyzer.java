@@ -91,7 +91,7 @@ public class JavaAnalyzer {
             add("-target");
             add(String.valueOf(version));
             add("-bootclasspath");
-            add(FileUtil.getClassPathDir(editor.getContext()).getAbsolutePath());
+            add(FileUtil.getClassPathDir(editor.getContext()).getAbsolutePath() + "/android.jar");
             addAll(options);
         }};
         
