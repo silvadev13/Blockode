@@ -90,6 +90,8 @@ public class JavaAnalyzer {
             add(String.valueOf(version));
             add("-target");
             add(String.valueOf(version));
+            add("-bootclasspath");
+            add(FileUtil.getClassPathDir(editor.getContext())
             addAll(options);
         }};
         
