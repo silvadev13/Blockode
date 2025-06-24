@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Collections;
 import java.util.stream.Collectors;
 import javax.tools.Diagnostic;
 import javax.tools.DiagnosticCollector;
@@ -81,10 +82,10 @@ public class JavacTask extends Task {
             
          fileManager.setLocation(StandardLocation.CLASS_OUTPUT, Collections.singletonList(output));
          fileManager.setLocation(StandardLocation.PLATFORM_CLASS_PATH, Arrays.asList(
-             getAndroidJar(),
-             getLambdaStubs()
+             getAndroidJar(context),
+             getLambdaStubs(context)
          ));
-         Log.d("EditorDebug", "AndroidJarPath = " + getAndroidJar.getAbsolutePath());
+         Log.d("EditorDebug", "AndroidJarPath = " + getAndroidJar(context).getAbsolutePath());
          fileManager.setLocation(StandardLocation.CLASS_PATH, getClassPath());
          fileManager.setLocation(StandardLocation.SOURCE_PATH, javaFiles);
          
