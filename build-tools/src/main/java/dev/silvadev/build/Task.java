@@ -25,6 +25,28 @@ public abstract class Task {
    public abstract void configure();
    public abstract void start() throws Exception;
    
+   public File getAndroidJar(Context context) {
+     List<File> files = new ArrayList<>();
+       
+       File[] fileArray = new File(context.getExternalFilesDir(null), "classpath").listFiles();
+       for(File file : fileArray) {
+       	if (file.getAbsolutePath().endsWith("android.jar")) return file;
+       }
+       
+       return null;
+   }
+   
+   public File getLambdaStubs(Context context) {
+     List<File> files = new ArrayList<>();
+       
+       File[] fileArray = new File(context.getExternalFilesDir(null), "classpath").listFiles();
+       for(File file : fileArray) {
+       	if (file.getAbsolutePath().endsWith("core-lambda-stubs.jar")) return file;
+       }
+       
+       return null;
+   }
+   
    public List<File> getClassPathDir(Context context) {
    	List<File> files = new ArrayList<>();
        

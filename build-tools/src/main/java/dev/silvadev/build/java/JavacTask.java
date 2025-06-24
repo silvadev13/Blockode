@@ -79,8 +79,12 @@ public class JavacTask extends Task {
             })
             .collect(Collectors.toList());
             
-         fileManager.setLocation(StandardLocation.CLASS_OUTPUT, Arrays.asList(output));
-         fileManager.setLocation(StandardLocation.PLATFORM_CLASS_PATH, getClassPathDir(context));
+         fileManager.setLocation(StandardLocation.CLASS_OUTPUT, Collections.singletonList(output));
+         fileManager.setLocation(StandardLocation.PLATFORM_CLASS_PATH, Arrays.asList(
+             getAndroidJar(),
+             getLambdaStubs()
+         ));
+         Log.d("EditorDebug", "AndroidJarPath = " + getAndroidJar.getAbsolutePath());
          fileManager.setLocation(StandardLocation.CLASS_PATH, getClassPath());
          fileManager.setLocation(StandardLocation.SOURCE_PATH, javaFiles);
          
