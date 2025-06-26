@@ -9,6 +9,5 @@ java {
 
 dependencies {
     api("com.github.marschall:zipfilesystem-standalone:1.0.1")
-    api("io.github.itsaky:nb-javac-android:17.0.0.3")
     api(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 }
