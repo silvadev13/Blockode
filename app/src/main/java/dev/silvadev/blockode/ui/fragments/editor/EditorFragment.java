@@ -109,7 +109,7 @@ public class EditorFragment extends BaseFragment {
               } else {
                   
                   getParentFragmentManager().popBackStack();
-              ]
+              }
             }
         });
     }
