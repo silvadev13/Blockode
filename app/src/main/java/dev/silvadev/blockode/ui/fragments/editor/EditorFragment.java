@@ -69,7 +69,7 @@ public class EditorFragment extends BaseFragment {
     @Override
     protected void onBindLayout(final Bundle savedInstanceState) {
         if (getArguments() != null) {
-            editorState = getArguments().getParcelable("editoState");
+            editorState = getArguments().getParcelable("editorState");
         }
         setupData();
         setupViewModels();
@@ -108,7 +108,7 @@ public class EditorFragment extends BaseFragment {
               if (binding.drawer.isDrawerOpen(GravityCompat.START)) {
                   binding.drawer.closeDrawer(GravityCompat.START);
               } else {
-                  
+                  ProjectHolder.clear();
                   getParentFragmentManager().popBackStack();
               }
             }
