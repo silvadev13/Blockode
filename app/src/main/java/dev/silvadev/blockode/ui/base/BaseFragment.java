@@ -33,12 +33,14 @@ public abstract class BaseFragment extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                FragmentManager fm = getParentFragmentManager();
-                int stackEntryCount = fm.getBackStackEntryCount();
-                if (stackEntryCount > 1 || stackEntryCount != 1) {
-                    fm.popBackStack();
-                } else {
-                    requireActivity().finish();
+                if (!onBackPressed()) {
+                    FragmentManager fm = getParentFragmentManager();
+                    int stackEntryCount = fm.getBackStackEntryCount();
+                    if (stackEntryCount > 1 || stackEntryCount != 1) {
+                        fm.popBackStack();
+                    } else {
+                        requireActivity().finish();
+                    }
                 }
             }
         });
@@ -56,6 +58,10 @@ public abstract class BaseFragment extends Fragment {
             .replace(id, fragment, tag)
             .addToBackStack(null)
             .commit();
+    }
+    
+    protected boolean onBackPressed() {
+        return false;
     }
     
     protected void showFragment(BaseFragment fragment, String tag) {

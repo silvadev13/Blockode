@@ -101,18 +101,17 @@ public class EditorFragment extends BaseFragment {
             	
             }
         });
-        
-        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-              if (binding.drawer.isDrawerOpen(GravityCompat.START)) {
-                  binding.drawer.closeDrawer(GravityCompat.START);
-              } else {
-                  ProjectHolder.clear();
-                  getParentFragmentManager().popBackStack();
-              }
-            }
-        });
+    }
+    
+    @Override
+    protected boolean onBackPressed() {
+        if (binding.drawer.isDrawerOpen(GravityCompat.START)) {
+            binding.drawer.closeDrawer(GravityCompat.START);
+        } else {
+            ProjectHolder.clear();
+            getParentFragmentManager().popBackStack();
+        }
+        return true;
     }
     
     @SuppressWarnings("deprecation")
