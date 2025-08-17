@@ -15,7 +15,7 @@ public class Javap {
       javapTask.setLog(printStream);
       javapTask.run();
 
-      // Print the output
+      // Print the output str
       System.out.println(outputStream.toString());
     } catch (Exception e) {
       e.printStackTrace(); // Print the exception stack trace
