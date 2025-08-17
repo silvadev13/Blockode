@@ -39,7 +39,9 @@ public class MainActivity extends BaseAppCompatActivity {
 
   @Override
   protected void onBindLayout(@Nullable final Bundle savedInstanceState) {
-    showFragment(binding.content.getId(), new MainFragment(), "mainFragment");
+    if (savedInstanceState == null) {
+        showFragment(binding.content.getId(), new MainFragment(), "mainFragment");
+    }
     setupClassPathDir();
     try {
     	setEditorThemes();
