@@ -23,7 +23,13 @@ public abstract class BaseFragment extends Fragment {
         setReturnTransition(new MaterialSharedAxis(MaterialSharedAxis.X, false));
         setExitTransition(new MaterialSharedAxis(MaterialSharedAxis.X, true));
         setReenterTransition(new MaterialSharedAxis(MaterialSharedAxis.X, false));
-        
+    }
+    
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    	super.onCreateView(inflater, container, savedInstanceState);
+        root = bindLayout();
+        onBindLayout(savedInstanceState);
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -36,13 +42,6 @@ public abstract class BaseFragment extends Fragment {
                 }
             }
         });
-    }
-    
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    	super.onCreateView(inflater, container, savedInstanceState);
-        root = bindLayout();
-        onBindLayout(savedInstanceState);
         return root;
     }
     
