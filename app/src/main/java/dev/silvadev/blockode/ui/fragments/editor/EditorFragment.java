@@ -107,11 +107,9 @@ public class EditorFragment extends BaseFragment {
     protected boolean onBackPressed() {
         if (binding.drawer.isDrawerOpen(GravityCompat.START)) {
             binding.drawer.closeDrawer(GravityCompat.START);
-        } else {
-            ProjectHolder.clear();
-            getParentFragmentManager().popBackStack();
+            return true;
         }
-        return true;
+        return false;
     }
     
     @SuppressWarnings("deprecation")
