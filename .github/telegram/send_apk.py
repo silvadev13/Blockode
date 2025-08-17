@@ -1,5 +1,3 @@
-# Code from 
-#   https://github.com/Sketchware-Pro/Sketchware-Pro/tree/main/.github/workflows/deploay_artifacts.py
 # thanks ilyassealama
 from telethon import TelegramClient
 import os
@@ -9,6 +7,7 @@ api_id = int(os.getenv("API_ID"))
 api_hash = os.getenv("API_HASH")
 bot_token = os.getenv("BOT_TOKEN")
 group_id = int(os.getenv("CHAT_ID"))
+thread_id = int(os.getenv("THREAD_ID"))
 
 # File paths to send
 apk_to_send = os.getenv("APK_TO_SEND")
@@ -49,7 +48,8 @@ async def send_file(file_path):
             file=file_path,
             parse_mode='markdown',
             caption=message,
-            progress_callback=progress
+            progress_callback=progress,
+            reply_to=thread_id
         )
         print("\nFile sent successfully")
     except Exception as e:
