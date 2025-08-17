@@ -56,8 +56,7 @@ public class ProjectsFragment extends BaseFragment {
     public void openProject(final ProjectBean projectBean) {
         final var editorState = new EditorState();
         editorState.project = projectBean;
-        ProjectHolder.setEditorState(editorState);
-        showFragment(R.id.content, new EditorFragment(), "editorFragment");
+        showFragment(EditorFragment.newInstance(editorState), "editorFragment");
     }
     
     public void cardClick() {

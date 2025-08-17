@@ -40,4 +40,12 @@ public class ProjectHolder {
     public static FileViewModel getFileViewModel() {
     	return fileViewModel;
     }
+    
+    /* Method to clear */
+    
+    public static void clear() {
+        editorState = null;
+        projectManager = null;
+        fileViewModel = null;
+    }
 }

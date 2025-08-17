@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.google.android.material.transition.MaterialSharedAxis;
+import dev.silvadev.blockode.R;
 
 public abstract class BaseFragment extends Fragment {
     
@@ -38,11 +39,19 @@ public abstract class BaseFragment extends Fragment {
     protected abstract void onBindLayout(@Nullable final Bundle savedInstanceState);
     
     protected void showFragment(int id, BaseFragment fragment, String tag) {
-        getActivity().getSupportFragmentManager()
-        .beginTransaction()
-        .replace(id, fragment, tag)
-        .addToBackStack(null)
-        .commit();
+        getParentFragmentManager()
+            .beginTransaction()
+            .replace(id, fragment, tag)
+            .addToBackStack(null)
+            .commit();
+    }
+    
+    protected void showFragment(BaseFragment fragment, String tag) {
+        getParentFragmentManager()
+            .beginTransaction()
+            .replace(R.id.content, fragment, tag)
+            .addToBackStack(null)
+            .commit();
     }
     
     @Override

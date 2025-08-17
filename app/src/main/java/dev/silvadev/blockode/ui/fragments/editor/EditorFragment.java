@@ -47,6 +47,18 @@ public class EditorFragment extends BaseFragment {
     private FileViewModel fileViewModel;
     private TabLayoutMediator tabLayoutMediator;
     
+    public static EditorFragment newInstance(EditorState editorState) {
+        EditorFragment editor = new EditorFragment();
+        
+        Bundle args = new Bundle();
+        args.putParcelable("editorState", editorState);
+        editor.setArguments(args);
+        
+        return editor;
+    }
+    
+    public EditorFragment() {}
+    
     @Override
     protected View bindLayout() {
         binding = FragmentEditorBinding.inflate(getLayoutInflater());
@@ -55,6 +67,9 @@ public class EditorFragment extends BaseFragment {
     
     @Override
     protected void onBindLayout(final Bundle savedInstanceState) {
+        if (getArguments() != null) {
+            editorState = getArguments().getParcelable("editoState");
+        }
         setupData();
         setupViewModels();
         setupToolbar();
@@ -86,6 +101,17 @@ public class EditorFragment extends BaseFragment {
             }
         });
         
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecyclerOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+              if (binding.drawer.isDrawerOpen(GravityCompat.START)) {
+                  binding.drawer.closeDrawer(GravityCompat.START);
+              } else {
+                  
+                  getParentFragmentManager().popBackStack();
+              ]
+            }
+        });
     }
     
     @SuppressWarnings("deprecation")
@@ -188,10 +214,11 @@ public class EditorFragment extends BaseFragment {
     
     /* Get and define all needed variables */
     private void setupData() {
-    	if(ProjectHolder.getEditorState() != null) {
-    		editorState = ProjectHolder.getEditorState();
+    	if(editorState != null) {
             projectManager = new ProjectManager(getContext(), editorState.project.scId);
             fileViewModel = new ViewModelProvider(getActivity()).get(FileViewModel.class);
+            
+            ProjectHolder.setEditorState(editorState);
             ProjectHolder.setProjectManager(projectManager);
             ProjectHolder.setFileViewModel(fileViewModel);
     	}
