@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/menu_undo"
         android:title="@string/common_word_undo"
-        android:icon="@drawable/ic_mtrl_undo" />
+        android:icon="@drawable/ic_mtrl_undo"
+        app:showAsAction="always" />
     
     <item
         android:id="@+id/menu_redo"
         android:title="@string/common_word_redo"
-        android:icon="@drawable/ic_mtrl_redo" />
+        android:icon="@drawable/ic_mtrl_redo"
+        app:showAsAction="always" />
     
     <item
         android:id="@+id/menu_build"
         android:title="@string/common_word_run"
-        android:icon="@drawable/ic_mtrl_run" />
+        android:icon="@drawable/ic_mtrl_run"
+        app:showAsAction="always" />
     
     <item
         android:id="@+id/menu_save"
         android:title="@string/common_word_save"
-        android:icon="@drawable/ic_mtrl_save" />
+        android:icon="@drawable/ic_mtrl_save"
+        app:showAsAction="always" />
     
     <item
         android:id="@+id/menu_more"
