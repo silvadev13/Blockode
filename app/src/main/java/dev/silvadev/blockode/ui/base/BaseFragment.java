@@ -28,7 +28,7 @@ public abstract class BaseFragment extends Fragment {
             @Override
             public void handleOnBackPressed() {
                 FragmentManager fm = getParentFragmentManager();
-                stackEntryCount = fm.getBackStackEntryCount();
+                int stackEntryCount = fm.getBackStackEntryCount();
                 if (stackEntryCount > 1 || stackEntryCount != 1) {
                     fm.popBackStack();
                 } else {
