@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Toast;
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -101,7 +102,7 @@ public class EditorFragment extends BaseFragment {
             }
         });
         
-        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecyclerOwner(), new OnBackPressedCallback(true) {
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
               if (binding.drawer.isDrawerOpen(GravityCompat.START)) {
