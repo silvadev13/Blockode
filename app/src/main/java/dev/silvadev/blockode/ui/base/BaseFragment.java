@@ -23,6 +23,19 @@ public abstract class BaseFragment extends Fragment {
         setReturnTransition(new MaterialSharedAxis(MaterialSharedAxis.X, false));
         setExitTransition(new MaterialSharedAxis(MaterialSharedAxis.X, true));
         setReenterTransition(new MaterialSharedAxis(MaterialSharedAxis.X, false));
+        
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                FragmentManager fm = getParentFragmentManager();
+                stackEntryCount = fm.getBackStackEntryCount();
+                if (stackEntryCount > 1 || stackEntryCount != 1) {
+                    fm.popBackStack();
+                } else {
+                    requireActivity().finish();
+                }
+            }
+        });
     }
     
     @Override

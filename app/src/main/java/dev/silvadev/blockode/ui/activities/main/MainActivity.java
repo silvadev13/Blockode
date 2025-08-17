@@ -50,17 +50,6 @@ public class MainActivity extends BaseAppCompatActivity {
     }
     
   }
-  
-  @Override
-  @SuppressWarnings("DEPRECATION")
-  public void onBackPressed() {
-  	FragmentManager fm = getSupportFragmentManager();
-      if(fm.getBackStackEntryCount() > 1 || fm.getBackStackEntryCount() != 1) {
-      	fm.popBackStack();
-      } else {
-      	finish();
-      }
-  }
 
   @Override
   protected void onDestroy() {
